@@ -1,25 +1,25 @@
 {
-  "items": [
-      {"name": "Raffle Ticket", "price": 1, "imageURL": "image1.png"},
-      {"name": "Coloring Book", "price": 13, "imageURL": "image2.png"},
-      {"name": "PVC Photocard Holder", "price": 7, "imageURL": "image3.png"},
-      {"name": "Acrylic PC Holder", "price": 8, "imageURL": "image4.png"},
-      {"name": "Acrylic PC Stand", "price": 7, "imageURL": "image5.png"},
-      {"name": "ID Keychain", "price": 8, "imageURL": "image6.png"},
-      {"name": "Lightstick Keychain", "price": 8, "imageURL": "image7.png"},
-      {"name": "Nerdy Bongbongie Keychain", "price": 8, "imageURL": "image8.png"},
-      {"name": "Grad Cap Bongie Keychain", "price": 8, "imageURL": "image9.png"},
-      {"name": "Cool Bongie Keychain", "price": 8, "imageURL": "image10.png"},
-      {"name": "Ice Cream Bongie Keychain", "price": 8, "imageURL": "image11.png"},
-      {"name": "Post it Notes", "price": 5, "imageURL": "image12.png"},
-      {"name": "Lanyard", "price": 5, "imageURL": "image13.png"},
-      {"name": "Pen", "price": 5, "imageURL": "image14.png"},
-      {"name": "Washi Tape", "price": 4, "imageURL": "image15.png"},
-      {"name": "Zip Pouch", "price": 6, "imageURL": "image16.png"},
-      {"name": "Mirror", "price": 3, "imageURL": "image17.png"},
-      {"name": "Cat Plushie", "price": 20, "imageURL": "image18.png"},
-      {"name": "SVT Plushie", "price": 25, "imageURL": "image19.png"},
-      {"name": "Sticker Pack", "price": 4, "imageURL": "image20.png"},
-      {"name": "Clear PC Frame", "price": 4, "imageURL": "image21.png"}
-  ]
+  "items": {
+    "1": {"name": "Raffle Ticket", "price": 1, "id": "1"},
+    "2": {"name": "Coloring Book", "price": 13, "id": "2"},
+    "3": {"name": "PVC Photocard Holder", "price": 7, "id": "3"},
+    "4": {"name": "Acrylic PC Holder", "price": 8, "id": "4"},
+    "5": {"name": "Acrylic PC Stand", "price": 7, "id": "5"},
+    "6": {"name": "ID Keychain", "price": 8, "id": "6"},
+    "7": {"name": "Lightstick Keychain", "price": 8, "id": "7"},
+    "8": {"name": "Nerdy Bongbongie Keychain", "price": 8, "id": "8"},
+    "9": {"name": "Grad Cap Bongie Keychain", "price": 8, "id": "9"},
+    "10": {"name": "Cool Bongie Keychain", "price": 8, "id": "10"},
+    "11": {"name": "Ice Cream Bongie Keychain", "price": 8, "id": "11"},
+    "12": {"name": "Post it Notes", "price": 5, "id": "12"},
+    "13": {"name": "Lanyard", "price": 5, "id": "13"},
+    "14": {"name": "Pen", "price": 5, "id": "14"},
+    "15": {"name": "Washi Tape", "price": 4, "id": "15"},
+    "16": {"name": "Zip Pouch", "price": 6, "id": "16"},
+    "17": {"name": "Mirror", "price": 3, "id": "17"},
+    "18": {"name": "Cat Plushie", "price": 20, "id": "18"},
+    "19": {"name": "SVT Plushie", "price": 25, "id": "19"},
+    "20": {"name": "Sticker Pack", "price": 4, "id": "20"},
+    "21": {"name": "Clear PC Frame", "price": 4, "id": "21"}
+  }  
 }

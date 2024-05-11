@@ -1,0 +1,26 @@
+@import 'src/constants/colors.scss';
+
+.inventoryContainer {
+  border: 3px solid $accentColor;
+  width: 100%;
+  border-radius: 15px;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 15px;
+  background-color: $inventoryBackgroundColor;
+}
+
+.inventory {
+  gap: 10px;
+
+  display: grid;
+  grid-auto-flow: column;  // This will ensure the grid fills column-wise
+  grid-template-rows: repeat(2, 200px); // Exactly two rows
+  gap: 20px; // Space between items
+  overflow-x: auto;
+  width: 100%; // Adjust based on the container's width or set a specific max-width if needed
+  // height: 310px; // Height is calculated to fit exactly two rows, considering the gap
+
+  scroll-snap-type: mandatory;
+  scroll-snap-type: x mandatory;
+}

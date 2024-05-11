@@ -1,48 +1,36 @@
-import inventory from '../../../constants/inventory.json';
+// import {useEffect, useState} from 'react';
+import {Cart, Inventory} from './components';
 import styles from './styles.module.scss';
 
-const Cart = () => {
-  return (
-    <div className={styles.cart}>
-      <h1>Cart</h1>
-    </div>
-  );
-};
-
-const Item = ({potion}) => {
-  return (
-    <div className={styles.potion}>
-      <h3>{potion.name}</h3>
-    </div>
-  );
-};
-
-const Inventory = ({potions}) => {
-  return (
-    <div className={styles.inventory}>
-      {potions.map((potion) => {
-        return <Item potion={potion} key={potion.name} />;
-      })}
-    </div>
-  );
-};
-
-const Checkout = () => {
-  // Checkout button on the right, cancel on the left
+const Checkout = ({clearCart}) => {
   return (
     <div className={styles.checkoutContainer}>
-      <button>Cancel</button>
-      <button>Checkout</button>
+      <button
+        className={styles.cancel}
+        onClick={clearCart}>Cancel / Clear Cart
+      </button>
+      <button className={styles.checkout}>Checkout</button>
     </div>
   );
 };
 
-const Store = () => {
+const Store = ({cart, potions, setCart}) => {
+  if (!potions || !cart) {
+    return null;
+  }
+  const clearCart = () => {
+    const newCart = {};
+    Object.keys(potions).forEach((key) => {
+      newCart[key] = 0;
+    });
+    setCart(newCart);
+  };
+
   return (
     <div className={styles.storeContainer}>
-      <Cart />
-      <Inventory potions={inventory.items} />
-      <Checkout />
+      <Cart cart={cart} potions={potions} />
+      <Inventory potions={potions} cart={cart} setCart={setCart} />
+      <Checkout clearCart={clearCart} />
     </div>
   );
 };

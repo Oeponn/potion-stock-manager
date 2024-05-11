@@ -1,0 +1,9 @@
+@import 'src/constants/colors.scss';
+
+.pageContainer {
+  /* discord gray background */
+  /* background-color: #36393F; */
+  background-color: $backgroundColor;
+  height: 100svh;
+  color: $darkTextColor;
+}

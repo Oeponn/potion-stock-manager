@@ -1,0 +1,64 @@
+@import 'src/constants/colors.scss';
+
+.potion {
+  position: relative;
+  background-color: $potionBackgroundColor;
+  height: 200px;
+  width: 150px;
+  border-radius: 15px;
+  overflow: hidden;
+
+  scroll-snap-align: start;
+  padding: 10px 10px 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  h3 {
+    font-size: 12px;
+    font-weight: normal;
+  }
+
+  .quantityContainer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 30px;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #C07D66;
+    // background-color: $backgroundColor;
+
+    input {
+      text-align: center;
+      width: calc(100% - 44px);
+      background: rgba(255, 255, 255, 0.25);
+      border: none;
+    }
+
+    .subtract, .add {
+      height: 100%;
+      border: none;
+      width: 40px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: none;
+
+      color: $potionBackgroundColor;
+    }
+
+    .subtract {
+      border-right: 2px solid $potionBackgroundColor;
+    }
+
+    .add {
+      border-left: 2px solid $potionBackgroundColor;
+    }
+  }
+}
