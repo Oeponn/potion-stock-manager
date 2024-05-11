@@ -1,7 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
+import {Routes, Route, BrowserRouter} from 'react-router-dom';
+import './App.css';
+
+const Atom = () => {
   return (
     <div className="App">
       <header className="App-header">
@@ -21,5 +24,24 @@ function App() {
     </div>
   );
 }
+
+const App = () => {
+  return (
+    <div
+      className="appContainer"
+    >
+      <BrowserRouter basename="/potion-stock-manager">
+        <div className="pageContainer">
+          <Routes>
+            <Route path='/' element={<Atom/>} />
+            <Route path='/test' element={<div>Test</div>} />
+          </Routes>
+        </div>
+        {/* <Header /> */}
+      </BrowserRouter>
+
+    </div>
+  );
+};
 
 export default App;
