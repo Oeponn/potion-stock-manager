@@ -1,0 +1,54 @@
+name: 'Build & Public Node Site'
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: 'Build Node'
+    steps:
+      - name: 'Checkout the repo'
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '16.18.0'
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: 'Initialize and build'
+        run: "npm install && DISABLE_ESLINT_PLUGIN=true npm run build"
+
+      - name: '404 workaround for static router'
+        run: "cp ./build/index.html ./build/404.html"
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./build
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
