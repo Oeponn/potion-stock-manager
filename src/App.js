@@ -1,43 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
-
 import {Routes, Route, BrowserRouter} from 'react-router-dom';
+import {Store} from './components/pages';
 import './App.css';
-
-const Atom = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Potion Manager
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
 
 const App = () => {
+  const basename =
+    process.env.NODE_ENV === 'production' ? process.env.PUBLIC_URL : '';
+
   return (
     <div
       className="appContainer"
     >
-      <BrowserRouter basename="/potion-stock-manager">
+      <BrowserRouter basename={basename}>
         <div className="pageContainer">
           <Routes>
-            <Route path='/' element={<Atom/>} />
+            <Route path='/' element={<Store/>} />
             <Route path='/test' element={<div>Test</div>} />
           </Routes>
         </div>
-        {/* <Header /> */}
       </BrowserRouter>
 
     </div>

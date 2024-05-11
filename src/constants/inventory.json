@@ -1,0 +1,25 @@
+{
+  "items": [
+      {"name": "Raffle Ticket", "price": 1, "imageURL": "image1.png"},
+      {"name": "Coloring Book", "price": 13, "imageURL": "image2.png"},
+      {"name": "PVC Photocard Holder", "price": 7, "imageURL": "image3.png"},
+      {"name": "Acrylic PC Holder", "price": 8, "imageURL": "image4.png"},
+      {"name": "Acrylic PC Stand", "price": 7, "imageURL": "image5.png"},
+      {"name": "ID Keychain", "price": 8, "imageURL": "image6.png"},
+      {"name": "Lightstick Keychain", "price": 8, "imageURL": "image7.png"},
+      {"name": "Nerdy Bongbongie Keychain", "price": 8, "imageURL": "image8.png"},
+      {"name": "Grad Cap Bongie Keychain", "price": 8, "imageURL": "image9.png"},
+      {"name": "Cool Bongie Keychain", "price": 8, "imageURL": "image10.png"},
+      {"name": "Ice Cream Bongie Keychain", "price": 8, "imageURL": "image11.png"},
+      {"name": "Post it Notes", "price": 5, "imageURL": "image12.png"},
+      {"name": "Lanyard", "price": 5, "imageURL": "image13.png"},
+      {"name": "Pen", "price": 5, "imageURL": "image14.png"},
+      {"name": "Washi Tape", "price": 4, "imageURL": "image15.png"},
+      {"name": "Zip Pouch", "price": 6, "imageURL": "image16.png"},
+      {"name": "Mirror", "price": 3, "imageURL": "image17.png"},
+      {"name": "Cat Plushie", "price": 20, "imageURL": "image18.png"},
+      {"name": "SVT Plushie", "price": 25, "imageURL": "image19.png"},
+      {"name": "Sticker Pack", "price": 4, "imageURL": "image20.png"},
+      {"name": "Clear PC Frame", "price": 4, "imageURL": "image21.png"}
+  ]
+}

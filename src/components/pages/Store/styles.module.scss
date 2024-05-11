@@ -1,0 +1,43 @@
+.storeContainer {
+  display: flex;
+  height: 100%;
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  > .cart, .inventory {
+    border: 4px solid #703A1E;
+    width: 100%;
+    border-radius: 20px;
+    padding: 15px;
+    box-sizing: border-box;
+  }
+}
+
+.cart {
+  height: 150px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.inventory {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.checkoutContainer {
+  padding: 15px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: auto;
+  display: flex;
+  flex-direction: horizontal;
+  justify-content: space-between;
+}
+
+
+@media only screen and (min-width: 768px) {
+}
