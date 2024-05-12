@@ -11,6 +11,7 @@ const Cart = ({cart, potions}) => {
   return (
     <div className={styles.cartContainer}>
       <div className={styles.cartList}>
+        <p>In Cart:</p>
         <ul>
           {Object.keys(cart).map((key) => {
             if (cart[key] === 0) {

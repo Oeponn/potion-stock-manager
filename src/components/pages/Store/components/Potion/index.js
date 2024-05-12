@@ -23,7 +23,7 @@ const Potion = ({cart, potion, setCart}) => {
 
     setCart({
       ...cart,
-      [id]: +value,
+      [id]: value === '' ? '' :+value,
     });
   };
 
@@ -48,6 +48,7 @@ const Potion = ({cart, potion, setCart}) => {
           value={cart[id]}
           onChange={updateQuantity}
           onBlur={handleBlur}
+          disabled
         />
         <button className={styles.add} onClick={add}>+</button>
       </div>

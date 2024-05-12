@@ -15,7 +15,7 @@
 
   display: grid;
   grid-auto-flow: column;  // This will ensure the grid fills column-wise
-  grid-template-rows: repeat(2, 200px); // Exactly two rows
+  grid-template-rows: repeat(2, 150px); // Exactly two rows
   gap: 20px; // Space between items
   overflow-x: auto;
   width: 100%; // Adjust based on the container's width or set a specific max-width if needed

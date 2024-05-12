@@ -3,8 +3,8 @@
 .potion {
   position: relative;
   background-color: $potionBackgroundColor;
-  height: 200px;
-  width: 150px;
+  height: 150px;
+  width: 125px;
   border-radius: 15px;
   overflow: hidden;
 
@@ -31,13 +31,19 @@
     flex-direction: row;
     justify-content: space-between;
     background-color: #C07D66;
-    // background-color: $backgroundColor;
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 
     input {
       text-align: center;
       width: calc(100% - 44px);
-      background: rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.5);
       border: none;
+      color: $darkTextColor;
     }
 
     .subtract, .add {
