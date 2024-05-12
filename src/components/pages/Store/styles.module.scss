@@ -1,8 +1,9 @@
 @import 'src/constants/colors.scss';
+@import 'src/constants/dimensions.scss';
 
 .storeContainer {
   display: flex;
-  height: calc(100svh - 30px);
+  height: calc(100svh - $headerHeight);
   overflow-y: auto;
   box-sizing: border-box;
   padding: 15px;
@@ -94,4 +95,18 @@
 
 
 @media only screen and (min-width: 768px) {
+  .storeContainer {
+    height: calc(100svh - $headerHeightDesktop);
+  }
+
+  .paymentMethodContainer {
+    // .inputWrapper {
+    //   justify-content: flex-start;
+    // }
+
+    form {
+      justify-content: flex-start;
+      gap: 20px;
+    }
+  }
 }

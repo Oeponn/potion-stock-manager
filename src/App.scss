@@ -12,4 +12,15 @@
   background-size: 85px 85px, 85px 85px, 17px 17px, 17px 17px;
   background-position: -3.4000000000000004px -3.4000000000000004px, -3.4000000000000004px -3.4000000000000004px, -1.7000000000000002px -1.7000000000000002px, -1.7000000000000002px -1.7000000000000002px;
   color: $darkTextColor;
+
+
+}
+
+@media only screen and (min-width: 768px) {
+  .pageContainer {
+    > div {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+  }
 }
