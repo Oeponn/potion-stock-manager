@@ -36,8 +36,6 @@ const Potion = ({cart, potion, setCart}) => {
     }
   };
 
-  console.log('image:', `${process.env.PUBLIC_URL}/images/image${id}.png`);
-
   return (
     <div className={styles.potion}>
       {/* <img className={styles.image} src={image1} alt={potion.name} /> */}

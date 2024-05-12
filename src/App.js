@@ -179,6 +179,7 @@ const App = () => {
             //   setToken('');
             //   throw new Error('Unauthorized access - possibly invalid token');
             // }
+            setLoading(false);
             throw new Error('Network response was not ok ' + response.statusText);
           }
           return response.json();
@@ -197,6 +198,7 @@ const App = () => {
         })
         .catch((error) => {
           console.error('Error appending data:', error);
+          setLoading(false);
         });
   };
 

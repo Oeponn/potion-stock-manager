@@ -37,8 +37,6 @@ const Login = ({
 
     values.push('Payment Method', 'Total', 'Notes');
 
-    console.log('values:', values);
-
     const body = {
       values: [values],
     };
