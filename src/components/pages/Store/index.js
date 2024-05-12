@@ -8,7 +8,14 @@ const radioClassName = (paymentMethod, value) => {
     return styles.radio;
   }
 };
-const PaymentMethod = ({paymentMethod, setPaymentMethod}) => {
+const PaymentMethod = ({
+  notes,
+  paymentMethod,
+  reference,
+  setPaymentMethod,
+  setNotes,
+  setReference,
+}) => {
   return (
     <div className={styles.paymentMethodContainer}>
       <form>
@@ -64,20 +71,42 @@ const PaymentMethod = ({paymentMethod, setPaymentMethod}) => {
         Zelle
         </label>
       </form>
+      <div className={styles.inputWrapper}>
+        <textarea
+          type="text"
+          rows="1"
+          name="reference"
+          placeholder="Reference"
+          value={reference}
+          onChange={(event) => setReference(event.target.value)}
+        />
+        <textarea
+          className={styles.notesInput}
+          rows="2"
+          type="text"
+          name="notes"
+          placeholder="Notes"
+          value={notes}
+          onChange={(event) => setNotes(event.target.value)}
+        />
+      </div>
     </div>
   );
 };
 
-const Checkout = ({appendSheetData, clearCart}) => {
+const Checkout = ({appendSheetData, clearCart, loading}) => {
   return (
     <div className={styles.checkoutContainer}>
       <button
         className={styles.cancel}
-        onClick={clearCart}>Cancel / Clear Cart
+        onClick={clearCart}
+        disabled={loading}
+      >Cancel / Clear Cart
       </button>
       <button
         className={styles.checkout}
         onClick={appendSheetData}
+        disabled={loading}
       >Checkout
       </button>
     </div>
@@ -86,11 +115,17 @@ const Checkout = ({appendSheetData, clearCart}) => {
 
 const Store = ({
   cart,
+  notes,
   potions,
+  paymentMethod,
+  reference,
   setCart,
   appendSheetData,
-  paymentMethod,
+  setNotes,
   setPaymentMethod,
+  setReference,
+  totalPrice,
+  loading,
 }) => {
   if (!potions || !cart) {
     return null;
@@ -103,18 +138,28 @@ const Store = ({
       });
       setCart(newCart);
       setPaymentMethod('cash');
+      setReference('');
+      setNotes('');
     }
   };
 
   return (
     <div className={styles.storeContainer}>
-      <Cart cart={cart} potions={potions} />
+      <Cart cart={cart} potions={potions} totalPrice={totalPrice} />
       <Inventory potions={potions} cart={cart} setCart={setCart} />
       <PaymentMethod
+        notes={notes}
         paymentMethod={paymentMethod}
+        reference={reference}
+        setNotes={setNotes}
         setPaymentMethod={setPaymentMethod}
+        setReference={setReference}
       />
-      <Checkout clearCart={clearCart} appendSheetData={appendSheetData} />
+      <Checkout
+        clearCart={clearCart}
+        appendSheetData={appendSheetData}
+        loading={loading}
+      />
     </div>
   );
 };

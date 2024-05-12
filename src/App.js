@@ -12,7 +12,10 @@ const App = () => {
   const [cart, setCart] = useState({});
   const [sheetId, setSheetId] = useState('');
   const [sheetName, setSheetName] = useState('');
+  const [reference, setReference] = useState('');
+  const [notes, setNotes] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('cash');
+  const [loading, setLoading] = useState(false);
 
   const basename =
     process.env.NODE_ENV === 'production' ? process.env.PUBLIC_URL : '';
@@ -22,6 +25,9 @@ const App = () => {
     const storedSheetId = localStorage.getItem('potionSheetId');
     const storedSheetName = localStorage.getItem('potionSheetName');
     const storedPaymentMethod = localStorage.getItem('potionPaymentMethod');
+    const storedNotes = localStorage.getItem('potionNotes');
+    const storedReference = localStorage.getItem('potionReference');
+    const storedToken = localStorage.getItem('potionToken');
 
     // console.log('storedSheetId', storedSheetId, typeof storedSheetId);
     // console.log('storedSheetName', storedSheetName, typeof storedSheetName);
@@ -30,6 +36,9 @@ const App = () => {
     if (storedSheetId) setSheetId(storedSheetId);
     if (storedSheetName) setSheetName(storedSheetName);
     if (storedPaymentMethod) setPaymentMethod(storedPaymentMethod);
+    if (storedNotes) setNotes(storedNotes);
+    if (storedReference) setReference(storedReference);
+    if (storedToken) setToken(storedToken);
   }, []);
 
   useEffect(() => {
@@ -49,10 +58,21 @@ const App = () => {
     localStorage.setItem('potionPaymentMethod', paymentMethod);
   }, [paymentMethod]);
 
+  useEffect(() => {
+    localStorage.setItem('potionNotes', notes);
+  }, [notes]);
+
+  useEffect(() => {
+    localStorage.setItem('potionReference', reference);
+  }, [reference]);
+
+  useEffect(() => {
+    localStorage.setItem('potionToken', token);
+  }, [token]);
+
 
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem('potionCart'));
-    // console.log('storedCart', storedCart, typeof storedCart);
     if (storedCart) {
       setCart(storedCart);
       return;
@@ -75,6 +95,14 @@ const App = () => {
     return null;
   }
 
+  const potions = inventory.items;
+  let totalPrice = 0;
+  Object.keys(cart).forEach((key) => {
+    totalPrice += potions[key].price * cart[key];
+  });
+
+  totalPrice = totalPrice.toFixed(2);
+
   if (!token) {
     return (
       <BrowserRouter basename={basename}>
@@ -82,7 +110,7 @@ const App = () => {
           <Route
             path="/*"
             element={<Login
-              potions={inventory.items}
+              potions={potions}
               cart={cart}
               token={token}
               sheetId={sheetId}
@@ -99,47 +127,76 @@ const App = () => {
   }
 
   const appendSheetData = () => {
-    // const API_URL = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetName}:append?valueInputOption=USER_ENTERED`;
+    const API_URL = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetName}:append?valueInputOption=USER_ENTERED`;
 
     if (!window.confirm('Are you sure you want to checkout?')) {
       return;
     }
-    // sum up all quantities in cart
-    let total = 0;
-    Object.keys(cart).forEach((key) => {
-      total += cart[key];
+
+    const timestamp = new Date();
+    const date = timestamp.toLocaleString('en-US', {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true, // Set to false if you want 24-hour time format
     });
 
-    if (total === 0) {
+    const values = [date, reference];
+
+    let totalQuantity = 0;
+    Object.keys(cart).forEach((key) => {
+      totalQuantity += cart[key];
+      values.push(`$${(potions[key].price * cart[key]).toFixed(2)}`);
+      values.push(cart[key]);
+    });
+
+    if (totalQuantity === 0) {
       window.alert('Cart is empty!');
       return;
     }
 
-    // const body = {
-    //   values: [
-    //     ['Data 1', 'Data 2', 'Data 3', 'Data 4', 'Data 5', 'Paypal'], // Data to append
-    //   ],
-    // };
-    // fetch(API_URL, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Authorization': `Bearer ${token}`,
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(body),
-    // })
-    //     .then((response) => {
-    //       if (!response.ok) {
-    //         throw new Error('Network response was not ok ' + response.statusText);
-    //       }
-    //       return response.json();
-    //     })
-    //     .then((data) => {
-    //       console.log('Append response:', data);
-    //     })
-    //     .catch((error) => {
-    //       console.error('Error appending data:', error);
-    //     });
+    values.push(paymentMethod, `$${totalPrice}`, notes);
+
+    const body = {
+      values: [values],
+    };
+    setLoading(true);
+    fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    })
+        .then((response) => {
+          if (!response.ok) {
+            setToken('');
+            // if (response.status === 401) {
+            //   setToken('');
+            //   throw new Error('Unauthorized access - possibly invalid token');
+            // }
+            throw new Error('Network response was not ok ' + response.statusText);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log('Clearing cart after successful response:', data);
+          const newCart = {};
+          Object.keys(potions).forEach((key) => {
+            newCart[key] = 0;
+          });
+          setCart(newCart);
+          setPaymentMethod('cash');
+          setReference('');
+          setNotes('');
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error('Error appending data:', error);
+        });
   };
 
   return (
@@ -154,12 +211,18 @@ const App = () => {
               path='/'
               element={
                 <Store
-                  potions={inventory.items}
+                  potions={potions}
                   cart={cart}
+                  notes={notes}
                   paymentMethod={paymentMethod}
+                  reference={reference}
                   setCart={setCart}
+                  setNotes={setNotes}
                   setPaymentMethod={setPaymentMethod}
+                  setReference={setReference}
                   appendSheetData={appendSheetData}
+                  totalPrice={totalPrice}
+                  loading={loading}
                 />
               }
             />
@@ -167,7 +230,7 @@ const App = () => {
               path='/settings'
               element={
                 <Login
-                  potions={inventory.items}
+                  potions={potions}
                   cart={cart}
                   token={token}
                   sheetId={sheetId}

@@ -21,17 +21,36 @@
   border-radius: 15px;
   box-sizing: border-box;
   filter: drop-shadow(0px 15px 7px rgba(0, 0, 0, 0.3));
+  margin-bottom: 15px;;
   z-index: 1;
 
   form {
     display: flex;
     justify-content: space-between;
     font-size: 12px;
+    padding-bottom: 10px;
   }
 
   label {
     display: flex;
     flex-direction: column;
+  }
+
+  .inputWrapper {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    gap: 10px;
+
+    textarea {
+      height: 20px;
+    }
+
+    .notesInput {
+      width: 50%;
+      height: 40px;
+      text-align: start;
+    }
   }
 }
 
@@ -48,6 +67,10 @@
     height: 40px;
     border-radius: 15px;
     border: none;
+  }
+
+  button:disabled {
+    opacity: 50%;
   }
 
   .cancel {

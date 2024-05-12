@@ -1,13 +1,6 @@
 import styles from './styles.module.scss';
 
-const Cart = ({cart, potions}) => {
-  let totalPrice = 0;
-  Object.keys(cart).forEach((key) => {
-    totalPrice += potions[key].price * cart[key];
-  });
-
-  totalPrice = totalPrice.toFixed(2);
-
+const Cart = ({cart, potions, totalPrice}) => {
   return (
     <div className={styles.cartContainer}>
       <div className={styles.cartList}>
