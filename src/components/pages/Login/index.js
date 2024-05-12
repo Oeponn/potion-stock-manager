@@ -104,12 +104,6 @@ const Login = ({
     <div className={styles.loginContainer}>
       <div className={styles.login}>
         <h1>Settings</h1>
-        {token ? (
-        <div>Log in token present</div>
-      ): (
-        <div>No log in token</div>
-      )}
-        <button className={styles.loginButton} onClick={() => login()}>Sign in with Google</button>
         <div> Sheet ID: </div>
         <input
           value={sheetId}
@@ -122,6 +116,13 @@ const Login = ({
           onChange={(e) => setSheetName(e.target.value)}
           name="sheetName"
         />
+        {token ? (
+          <div>Log in token present</div>
+        ): (
+          <div>No log in token</div>
+        )}
+        <button className={styles.loginButton} onClick={() => login()}>Sign in with Google</button>
+        <hr />
         <button onClick={appendSheetData} disabled={!token}>
           Append Dummy Row Test
         </button>
