@@ -1,5 +1,4 @@
 import styles from './styles.module.scss';
-import image1 from './images/image1.png';
 
 const Potion = ({cart, potion, setCart}) => {
   const id = potion.id;
@@ -37,9 +36,16 @@ const Potion = ({cart, potion, setCart}) => {
     }
   };
 
+  console.log('image:', `${process.env.PUBLIC_URL}/images/image${id}.png`);
+
   return (
     <div className={styles.potion}>
-      <img className={styles.image} src={image1} alt={potion.name} />
+      {/* <img className={styles.image} src={image1} alt={potion.name} /> */}
+      <img
+        className={styles.image}
+        src={`${process.env.PUBLIC_URL}/images/image${id}.png`}
+        alt={potion.name}
+      />
       <h3>{potion.name} (${potion.price})</h3>
       <div className={styles.quantityContainer}>
         <button className={styles.subtract} onClick={subtract}>-</button>
@@ -49,7 +55,6 @@ const Potion = ({cart, potion, setCart}) => {
           onChange={updateQuantity}
           onBlur={handleBlur}
           name={`potion-quantity-${id}`}
-          // disabled
         />
         <button className={styles.add} onClick={add}>+</button>
       </div>

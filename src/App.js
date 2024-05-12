@@ -17,8 +17,9 @@ const App = () => {
   const [paymentMethod, setPaymentMethod] = useState('cash');
   const [loading, setLoading] = useState(false);
 
-  const basename =
-    process.env.NODE_ENV === 'production' ? process.env.PUBLIC_URL : '';
+  const basename = process.env.NODE_ENV === 'production' ? '/potion-stock-manager' : '';
+  // const basename = process.env.NODE_ENV === 'production' ? process.env.PUBLIC_URL : '';
+
 
   useEffect(() => {
     setInventory({...storedInventory});
@@ -209,6 +210,7 @@ const App = () => {
           <Routes>
             <Route
               path='/'
+              exact='true'
               element={
                 <Store
                   potions={potions}
@@ -228,6 +230,7 @@ const App = () => {
             />
             <Route
               path='/settings'
+              exact='true'
               element={
                 <Login
                   potions={potions}
