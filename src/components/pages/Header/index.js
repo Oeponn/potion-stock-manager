@@ -1,14 +1,26 @@
+/* eslint-disable max-len */
+import {NavLink} from 'react-router-dom';
 import styles from './styles.module.scss';
+
 const Header = () => {
   return (
-    <div className={styles.headerContainer}>
-      <h1>Anidraw Artist Carousel</h1>
-      {/* <div className={styles.linksContainer}>
-        <a href="https://instagram.com/oponn_">haha</a>
-        <a href="https://instagram.com/oponn_">hehe</a>
-        <a href="https://instagram.com/oponn_">hoho</a>
-        <a href="https://instagram.com/oponn_">hihi</a>
-      </div> */}
+    <div className={styles.container}>
+      <div className={styles.navContainer}>
+        <NavLink
+          to="/settings"
+          exact={'true'}
+          className={({isActive}) => isActive ? [styles.activeLink, styles.navLink].join(' ') : styles.navLink}
+        >
+          <div>Settings</div>
+        </NavLink>
+        <NavLink
+          to="/"
+          exact={'true'}
+          className={({isActive}) => isActive ? [styles.activeLink, styles.navLink].join(' ') : styles.navLink}
+        >
+          <div>Home</div>
+        </NavLink>
+      </div>
     </div>
   );
 };

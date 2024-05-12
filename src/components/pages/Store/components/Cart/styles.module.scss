@@ -8,11 +8,14 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: 125px;
+  height: 100px;
   width: 100%;
   padding: 15px 20px 15px 20px;
-  margin-bottom: 20px;
-  background-color: $cartBackgroundColor;
+  margin-bottom: 10px;
+  // background-color: $cartBackgroundColor;
+  background-color: $inventoryBackgroundColor;
+  filter: drop-shadow(0px 15px 7px rgba(0, 0, 0, 0.3));
+  z-index: 1;
 }
 
 .cartTotal {

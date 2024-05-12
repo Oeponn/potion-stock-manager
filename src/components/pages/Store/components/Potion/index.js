@@ -1,4 +1,5 @@
 import styles from './styles.module.scss';
+import image1 from './images/image1.png';
 
 const Potion = ({cart, potion, setCart}) => {
   const id = potion.id;
@@ -38,9 +39,8 @@ const Potion = ({cart, potion, setCart}) => {
 
   return (
     <div className={styles.potion}>
-      <h3>{potion.name}</h3>
-      {/* <img src={potion.imageURL} alt={potion.name} /> */}
-      <div>${potion.price}</div>
+      <img className={styles.image} src={image1} alt={potion.name} />
+      <h3>{potion.name} (${potion.price})</h3>
       <div className={styles.quantityContainer}>
         <button className={styles.subtract} onClick={subtract}>-</button>
         <input
@@ -48,7 +48,8 @@ const Potion = ({cart, potion, setCart}) => {
           value={cart[id]}
           onChange={updateQuantity}
           onBlur={handleBlur}
-          disabled
+          name={`potion-quantity-${id}`}
+          // disabled
         />
         <button className={styles.add} onClick={add}>+</button>
       </div>

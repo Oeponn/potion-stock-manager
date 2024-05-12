@@ -14,7 +14,7 @@ const Cart = ({cart, potions}) => {
         <p>In Cart:</p>
         <ul>
           {Object.keys(cart).map((key) => {
-            if (cart[key] === 0) {
+            if (!cart[key]) {
               return null;
             }
             return (
