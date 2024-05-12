@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {Routes, Route, BrowserRouter} from 'react-router-dom';
-import {Store} from './components/pages';
+import {Login, Store} from './components/pages';
 import storedInventory from './constants/inventory.json';
 
 import './App.scss';
@@ -10,7 +10,7 @@ const App = () => {
   const [cart, setCart] = useState(null);
 
   const basename =
-  process.env.NODE_ENV === 'production' ? process.env.PUBLIC_URL : '';
+    process.env.NODE_ENV === 'production' ? process.env.PUBLIC_URL : '';
 
   useEffect(() => {
     setInventory({...storedInventory});
@@ -48,6 +48,7 @@ const App = () => {
                 />
               }
             />
+            <Route path='/login' element={<Login />} />
             <Route path='/test' element={<div>Test</div>} />
           </Routes>
         </div>
