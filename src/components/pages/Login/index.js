@@ -52,6 +52,7 @@ const Login = ({
     })
         .then((response) => {
           if (!response.ok) {
+            setToken('');
             throw new Error('Network response was not ok ' + response.statusText);
           }
           return response.json();
@@ -60,6 +61,7 @@ const Login = ({
           console.log('Append response:', data);
         })
         .catch((error) => {
+          setToken('');
           console.error('Error appending data:', error);
         });
   };
@@ -86,6 +88,7 @@ const Login = ({
     })
         .then((response) => {
           if (!response.ok) {
+            setToken('');
             throw new Error('Network response was not ok ' + response.statusText);
           }
           return response.json();
@@ -95,6 +98,7 @@ const Login = ({
         })
         .catch((error) => {
           console.error('Error appending data:', error);
+          setToken('');
         });
   };
 

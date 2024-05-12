@@ -198,6 +198,7 @@ const App = () => {
         })
         .catch((error) => {
           console.error('Error appending data:', error);
+          setToken('');
           setLoading(false);
         });
   };
