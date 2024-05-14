@@ -145,16 +145,18 @@ const Store = ({
 
   return (
     <div className={styles.storeContainer}>
-      <Cart cart={cart} potions={potions} totalPrice={totalPrice} />
-      <Inventory potions={potions} cart={cart} setCart={setCart} />
-      <PaymentMethod
-        notes={notes}
-        paymentMethod={paymentMethod}
-        reference={reference}
-        setNotes={setNotes}
-        setPaymentMethod={setPaymentMethod}
-        setReference={setReference}
-      />
+      <div className={styles.inventoryContainer}>
+        <Cart cart={cart} potions={potions} totalPrice={totalPrice} />
+        <Inventory potions={potions} cart={cart} setCart={setCart} />
+        <PaymentMethod
+          notes={notes}
+          paymentMethod={paymentMethod}
+          reference={reference}
+          setNotes={setNotes}
+          setPaymentMethod={setPaymentMethod}
+          setReference={setReference}
+        />
+      </div>
       <Checkout
         clearCart={clearCart}
         appendSheetData={appendSheetData}
