@@ -1,70 +1,54 @@
-# Getting Started with Create React App
+# Potion Stock Manager
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A little point-of-sale / inventory app for a friend who sells Seventeen themed merch at conventions. "Potion" is just a random word I picked to mean "inventory" — there are no actual potions involved, it's lanyards and photocard holders and washi tape.
 
-## Available Scripts
+The whole thing is a React frontend that talks straight to the **Google Sheets API**. You log in with Google, tell it which sheet to use, and every checkout gets appended as a new row.
 
-In the project directory, you can run:
+## Why Google Sheets instead of a real backend?
 
-### `npm start`
+My friend was already tracking sales in a Google Sheet — that was their workflow. We had a convention coming up mid-week and not much time, so instead of standing up a backend and migrating them off of something that already worked, I just wrote the sales straight into their existing sheet. They keep their spreadsheet, we get a nice tappable form, and it was ready in time. Seamless beats clever.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## What it looks like
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Desktop:
 
-### `npm test`
+![Desktop view](docs/screenshots/desktop.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Mobile (it's meant to be used on a phone at the table):
 
-### `npm run build`
+![Mobile view](docs/screenshots/mobile.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## How it works
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. **Sign in with Google.** Required — the app asks for the `spreadsheets` scope so it can write on your behalf. Nothing happens without a logged-in Google account.
+2. **Enter your sheet.** In Settings you punch in the Google Sheets ID and the tab/sheet name you want rows appended to.
+3. **Ring people up.** Tap `+` / `-` on each item to build a cart, pick a payment method (Cash / Paypal / Venmo / Zelle), optionally add a reference + notes, and hit **Checkout**.
+4. **Row gets written.** Each checkout appends a row to your sheet: timestamp, reference, per-item totals + quantities, payment method, grand total, and notes.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The item catalog lives in [`src/constants/inventory.json`](src/constants/inventory.json) and the product images are in `public/images`. Your sheet ID, token, and in-progress cart are stashed in `localStorage`, so a refresh mid-convention won't wipe the cart.
 
-### `npm run eject`
+## Running it locally
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+It's a Create React App project.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm install
+npm start      # dev server at http://localhost:3000
+npm run build  # production build
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Heads up: the Google OAuth client ID is hardcoded in [`src/index.js`](src/index.js). If you fork this, swap in your own client ID from the Google Cloud console (and make sure your origin is on the authorized list).
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+It's deployed to GitHub Pages at the `homepage` in `package.json`.
 
-## Learn More
+## Tech
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- React 18 + React Router
+- `@react-oauth/google` for the Google login
+- Google Sheets API v4 (`values:append`) as the "database"
+- Sass modules for styling
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Notes / caveats
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- This was built fast for a specific event, so it's tailored to one seller's catalog and sheet layout. Editing the items means editing `inventory.json`.
+- Because it writes directly from the browser, whoever's signed in needs edit access to the sheet.
