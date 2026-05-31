@@ -50,5 +50,5 @@ It's deployed to GitHub Pages at the `homepage` in `package.json`.
 
 ## Notes / caveats
 
-- This was built fast for a specific event, so it's tailored to one seller's catalog and sheet layout. Editing the items means editing `inventory.json`.
+- This was built fast for a specific event, so it's tailored to one seller's catalog and sheet layout. Editing the items means editing `inventory.json`. This was also before AI coding started becoming super common and helpful. A lot of time was sunk on getting the Auth working.
 - Because it writes directly from the browser, whoever's signed in needs edit access to the sheet.
